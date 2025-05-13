@@ -6,6 +6,7 @@ import commonStyles from '../common.module.css';
 
 import { ProfileUIProps } from './type';
 import { ProfileMenu } from '@components';
+import { Outlet } from 'react-router-dom';
 
 export const ProfileUI: FC<ProfileUIProps> = ({
   formValue,

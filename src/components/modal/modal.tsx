@@ -1,15 +1,21 @@
 import { FC, memo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-
+import { useNavigate } from 'react-router-dom';
 import { TModalProps } from './type';
 import { ModalUI } from '@ui';
 
 const modalRoot = document.getElementById('modals');
 
 export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
+  const navigate = useNavigate();
+
+  // Если onClose не передан, используем navigate(-1)
+  const handleClose = onClose ?? (() => navigate(-1));
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      e.key === 'Escape' && onClose();
+      //e.key === 'Escape' && onClose();
+      e.key === 'Escape' && handleClose();
     };
 
     document.addEventListener('keydown', handleEsc);
@@ -19,7 +25,8 @@ export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
   }, [onClose]);
 
   return ReactDOM.createPortal(
-    <ModalUI title={title} onClose={onClose}>
+    //<ModalUI title={title} onClose={onClose}>
+    <ModalUI title={title} onClose={handleClose}>
       {children}
     </ModalUI>,
     modalRoot as HTMLDivElement
