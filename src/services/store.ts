@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { ingredientsReducer } from './ingredientsSlice';
-import { burgerConstructorReducer } from './burgerConstructorSlice';
+import { burgerConstructorReducer } from './constructorSlice';
 import { ordersReducer } from './ordersSlice';
 import { userReducer } from './userSlice';
 import {
@@ -8,11 +8,10 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
-import { Root } from 'react-dom/client';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
-  BurgerConstructor: burgerConstructorReducer,
+  burgerConstructor: burgerConstructorReducer,
   orders: ordersReducer,
   user: userReducer
 });
@@ -45,7 +44,7 @@ export const selectIngredient = (id: string) => (state: RootState) =>
 
 // Selectors burgerConstuctor
 export const selectConstructorItems = (state: RootState) =>
-  state.BurgerConstructor.constructorItems;
+  state.burgerConstructor.constructorItems;
 
 // Selectors orders
 export const selectOrdersAll = (state: RootState) => state.orders.orders;
@@ -66,5 +65,7 @@ export const selectOrdersProfile = (state: RootState) =>
 export const selectUser = (state: RootState) => state.user.user;
 export const selectIsAuthChecked = (state: RootState) =>
   state.user.isAuthChecked;
+export const selectIsAuthenticated = (state: RootState) =>
+  state.user.isAuthenticated;
 
 export default store;

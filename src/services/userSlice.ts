@@ -16,7 +16,7 @@ import {
 import { TUser } from '@utils-types';
 import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
 
-interface UserState {
+export interface UserState {
   user: TUser | null;
   isLoading: boolean;
   error: string | null;
@@ -147,6 +147,7 @@ const userSlice = createSlice({
         state.isAuthChecked = true;
         state.isAuthenticated = true;
         state.isLoading = false;
+        state.error = null;
         setCookie('accessToken', action.payload.accessToken);
         localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
@@ -178,6 +179,7 @@ const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(fetchUser.pending, (state) => {
         state.isLoading = true;
@@ -190,12 +192,17 @@ const userSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
+        state.isAuthChecked = true;
+        state.isAuthenticated = true;
+        state.error = null;
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload as string;
       })
       .addCase(logoutUser.fulfilled, (state, action) => ({
         ...initialState,
@@ -203,14 +210,17 @@ const userSlice = createSlice({
       }))
       .addCase(resetPasswordUser.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
-      .addCase(resetPasswordUser.rejected, (state) => {
+      .addCase(resetPasswordUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isAuthChecked = true;
+        state.error = action.payload as string;
       })
       .addCase(resetPasswordUser.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuthChecked = true;
+        state.error = null;
       });
   }
 });

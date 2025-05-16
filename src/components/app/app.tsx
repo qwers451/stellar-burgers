@@ -11,7 +11,11 @@ import {
   ProfileOrders,
   NotFound404
 } from '@pages';
-import { useDispatch } from '../../services/store';
+import {
+  selectIsAuthenticated,
+  useDispatch,
+  useSelector
+} from '../../services/store';
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
@@ -28,13 +32,16 @@ const App = () => {
   const location = useLocation();
 
   const backgroundLocation = location.state?.backgroundLocation;
-
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(fetchIngredients());
     dispatch(fetchOrdersAll());
-    dispatch(ordersBurgerProfile());
   }, []);
+
+  useEffect(() => {
+    dispatch(ordersBurgerProfile());
+  }, [isAuthenticated]);
 
   return (
     <div className={styles.app}>

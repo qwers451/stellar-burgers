@@ -14,7 +14,7 @@ import {
   resetOrder
 } from '../../services/ordersSlice';
 import { useNavigate } from 'react-router-dom';
-import { reset } from '../../services/burgerConstructorSlice';
+import { reset } from '../../services/constructorSlice';
 
 export const BurgerConstructor: FC = () => {
   const constructorItems = useSelector(selectConstructorItems);
@@ -27,8 +27,19 @@ export const BurgerConstructor: FC = () => {
     if (!user) {
       navigate('/login');
     }
-    if (!constructorItems.bun || orderRequest) return;
-    dispatch(orderBurger(constructorItems.ingredients.map((item) => item._id)))
+    if (
+      !constructorItems.bun ||
+      orderRequest ||
+      !constructorItems.ingredients.length
+    )
+      return;
+    dispatch(
+      orderBurger([
+        constructorItems.bun._id,
+        ...constructorItems.ingredients.map((item) => item._id),
+        constructorItems.bun._id
+      ])
+    )
       .unwrap()
       .then(() => {
         dispatch(reset());
