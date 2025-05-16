@@ -227,3 +227,4 @@ const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const { authChecked } = userSlice.actions;
+export { initialState as userInitialState };

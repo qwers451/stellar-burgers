@@ -91,3 +91,4 @@ const ordersSlice = createSlice({
 
 export const ordersReducer = ordersSlice.reducer;
 export const { resetOrder } = ordersSlice.actions;
+export { initialState as ordersInitialState };

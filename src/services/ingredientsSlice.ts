@@ -16,7 +16,7 @@ interface ingredientsState {
   entities: TIngredient[];
 }
 
-const initialState: ingredientsState = {
+export const ingredientsInitialState: ingredientsState = {
   isLoading: false,
   isInit: false,
   entities: []
@@ -24,7 +24,7 @@ const initialState: ingredientsState = {
 
 const ingredientsSlice = createSlice({
   name: 'ingredients',
-  initialState,
+  initialState: ingredientsInitialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
