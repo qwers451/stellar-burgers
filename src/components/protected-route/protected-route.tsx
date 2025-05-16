@@ -12,7 +12,10 @@ type ProtectedRouteProps = {
   children: React.ReactElement;
 };
 
-export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({
+  onlyUnAuth,
+  children
+}: ProtectedRouteProps) => {
   const location = useLocation();
   const user = useSelector(selectUser);
   const isAuthChecked = useSelector(selectIsAuthChecked);
@@ -22,7 +25,7 @@ export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) =>
   }
 
   if (!onlyUnAuth && !user) {
-    return <Navigate replace to="/login" />;
+    return <Navigate replace to='/login' />;
   }
 
   if (onlyUnAuth && user) {

@@ -1,0 +1,31 @@
+{
+    "success": true,
+    "orders": [
+        {
+            "_id": "6817b7fbe8e61d001cec60a2",
+            "ingredients": [
+                "643d69a5c3f7b9001cfa093e"
+            ],
+            "status": "done",
+            "name": "Люминесцентный бургер",
+            "createdAt": "2025-05-04T18:54:51.182Z",
+            "updatedAt": "2025-05-04T18:54:51.842Z",
+            "number": 76234
+        },
+        {
+            "_id": "6817b838e8e61d001cec60a3",
+            "ingredients": [
+                "643d69a5c3f7b9001cfa093e",
+                "643d69a5c3f7b9001cfa093e",
+                "643d69a5c3f7b9001cfa093e"
+            ],
+            "status": "done",
+            "name": "Люминесцентный бургер",
+            "createdAt": "2025-05-04T18:55:52.448Z",
+            "updatedAt": "2025-05-04T18:55:53.145Z",
+            "number": 76235
+        }
+    ],
+    "total": 76263,
+    "totalToday": 94
+}

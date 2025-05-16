@@ -2,7 +2,6 @@ import {
   getFeedsApi,
   getOrdersApi,
   orderBurgerApi,
-  TFeedsResponse,
   TNewOrderResponse
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -76,6 +75,8 @@ const ordersSlice = createSlice({
       })
       .addCase(orderBurger.rejected, (state, action) => {
         state.orderRequest = false;
+        state.name = null;
+        state.orderModalData = null;
       })
       .addCase(orderBurger.fulfilled, (state, action) => {
         state.orderRequest = false;
@@ -90,3 +91,4 @@ const ordersSlice = createSlice({
 
 export const ordersReducer = ordersSlice.reducer;
 export const { resetOrder } = ordersSlice.actions;
+export { initialState as ordersInitialState };
